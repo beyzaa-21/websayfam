@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Yapay Zeka Haberleri</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --dark-bg-primary: #2c3e50;
+            --dark-bg-secondary: #34495e;
+            --light-bg-primary: #f5f5f5;
+            --light-bg-secondary: #ffffff;
+            --dark-text: #333333;
+            --light-text: #ffffff;
+            --light-text-secondary: #bdc3c7;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #e74c3c;
+            --dark-bg-primary: #121212;
+            --dark-bg-secondary: #1e1e1e;
+            --light-bg-primary: #1e1e1e;
+            --light-bg-secondary: #2d2d2d;
+            --dark-text: #f5f5f5;
+            --light-text: #f5f5f5;
+            --light-text-secondary: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: var(--light-bg-primary);
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--light-bg-secondary);
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 25px;
+        }
+
+        .navbar ul li a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+
+        .navbar ul li a:hover::after {
+            width: 100%;
+        }
+
+        .navbar ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-right: 15px;
+            background-color: var(--light-bg-primary);
+            transition: var(--transition);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            background: transparent;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: var(--dark-text);
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .auth-buttons button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+
+        .auth-buttons button:hover {
+            opacity: 0.9;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-text);
+            margin-left: 15px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--dark-bg-primary);
+            color: var(--light-text);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover; /* Gerçekçi arka plan görseli */
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: var(--light-text-secondary);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            animation: zoomIn 1s ease-out;
+        }
+
+        .hero button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* News Sections */
+        .section-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin: 40px 0 30px;
+            color: var(--dark-text);
+            position: relative;
+            padding-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Slider */
+        .slider {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 50px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--light-bg-secondary);
+            transition: var(--transition);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px; /* Sabit yükseklik */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .slide-content h2 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .slide-content p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .slide-content .read-more {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .slide-content .read-more:hover {
+            background-color: #c0392b;
+        }
+
+        .slider-nav button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 2em;
+            z-index: 10;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-nav button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .slider-nav .prev {
+            left: 10px;
+        }
+
+        .slider-nav .next {
+            right: 10px;
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .news-card {
+            background-color: var(--light-bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-card-content {
+            padding: 20px;
+        }
+
+        .news-card-content .category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+
+        .news-card-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .news-card-content p {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .news-card-content .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .news-card-content .read-more:hover {
+            color: #c0392b;
+        }
+
+        .load-more-btn {
+            display: block;
+            margin: 30px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .load-more-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .news-loader {
+            text-align: center;
+            margin-top: 20px;
+            display: none; /* Varsayılan olarak gizli */
+        }
+
+        .news-loader .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* About Section Styles */
+        .about-section {
+            background-color: var(--dark-bg-primary);
+            color: var(--light-text);
+            padding: 60px 0;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-section .section-title {
+            color: var(--light-text);
+            margin-bottom: 40px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .about-content p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--light-text-secondary);
+            text-align: center;
+        }
+
+        /* Contact Section Styles */
+        .contact-section {
+            background-color: var(--light-bg-secondary);
+            padding: 60px 0;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .contact-section .section-title {
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: var(--light-bg-primary);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--light-bg-secondary);
+            color: var(--dark-text);
+            transition: var(--transition);
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+
+        .contact-form textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 120px;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: var(--transition);
+        }
+
+        .contact-form button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .contact-success, .contact-error {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+
+        .contact-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .contact-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg-secondary);
+            color: var(--light-text);
+            padding: 40px 0;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .footer-section p {
+            font-size: 0.9em;
+            color: var(--light-text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: var(--light-text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 24px;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .newsletter form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .newsletter input[type="email"] {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background-color: var(--dark-bg-primary);
+            color: var(--light-text);
+            outline: none;
+        }
+
+        .newsletter button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter button:hover {
+            background-color: #c0392b;
+        }
+
+        .newsletter-error {
+            color: #ffcccc;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9em;
+            color: var(--light-text-secondary);
+        }
+
+        /* Modals */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--light-bg-secondary);
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            transition: var(--transition);
+            animation: zoomInModal 0.3s ease-out;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="email"],
+        .modal-content input[type="password"] {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: var(--light-bg-primary);
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+
+        .modal-content input[type="text"]:focus,
+        .modal-content input[type="email"]:focus,
+        .modal-content input[type="password"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .modal-content button[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button[type="submit"]:hover {
+            background-color: #c0392b;
+        }
+
+        .modal-error {
+            color: var(--primary-color);
+            font-size: 0.85em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomInModal {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* News Detail Modal Styles */
+        .news-detail-modal .modal-content {
+            max-width: 800px; /* Daha geniş bir modal */
+            padding: 40px;
+            text-align: left;
+        }
+
+        .news-detail-modal .modal-content img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .news-detail-modal .modal-content .category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .news-detail-modal .modal-content h2 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+            text-align: left;
+        }
+
+        .news-detail-modal .modal-content p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                display: none; /* Hide navbar on small screens by default */
+            }
+
+            .header-actions {
+                flex-grow: 1;
+                justify-content: flex-end;
+            }
+
+            .search-bar {
+                margin-right: 5px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .slider-nav button {
+                padding: 10px;
+                font-size: 1.5em;
+            }
+
+            .slide {
+                height: 300px;
+            }
+
+            .slide-content h2 {
+                font-size: 1.8em;
+            }
+
+            .slide-content p {
+                font-size: 0.9em;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .newsletter form {
+                justify-content: center;
+            }
+
+            .news-detail-modal .modal-content {
+                padding: 20px;
+            }
+
+            .news-detail-modal .modal-content h2 {
+                font-size: 1.8em;
+            }
+
+            .news-detail-modal .modal-content p {
+                font-size: 1em;
+            }
+        }
+
+       /* Chatbot Styles - Unified and Corrected */
+        .chatbot-container {
+            position: fixed;
+            bottom: 90px; /* Adjusted to be above the button */
+            right: 20px;
+            width: 380px;
+            height: 550px;
+            background: #2a2a2a; /* Dark background from the second style block */
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: none; /* Hidden by default for JS toggle */
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1001; /* Higher z-index than button */
+            animation: slideUp 0.3s ease;
+        }
+
+        .chatbot-container.active {
+            display: flex; /* Display when active */
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-status {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+        }
+
+        .ai-service-selector {
+            padding: 15px 20px;
+            background: #1e1e1e;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .service-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .service-btn {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-btn:hover {
+            background: #4a4a4a;
+        }
+
+        .service-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+        }
+
+        .service-status {
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #1e1e1e;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.bot .message-content {
+            background: #3a3a3a;
+            color: #fff;
+            border-bottom-left-radius: 6px;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        .message.error .message-content {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .chatbot-input {
+            padding: 20px;
+            background: #2a2a2a;
+            border-top: 1px solid #3a3a3a;
+        }
+
+        .input-container {
+            display: flex;
+            background: #3a3a3a;
+            border-radius: 25px;
+            padding: 5px;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-field::placeholder {
+            color: #888;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: #3a3a3a;
+            border-radius: 18px;
+            border-bottom-left-radius: 6px;
+            max-width: 80%;
+            margin-bottom: 15px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #888;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 3px;
+        }
+
+        /* Chatbot Toggle Button */
+        .chatbot-toggle-button { /* Renamed from .chatbot-button for clarity and consistency */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-toggle-button svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .chatbot-container {
+                width: 95vw;
+                height: 75vh;
+                right: 2.5vw;
+                bottom: 90px;
+            }
+             .chatbot-toggle-button {
+                bottom: 10px;
+                right: 10px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+<div class="container">
+<a class="logo" href="#hero">AI News</a> <nav class="navbar">
+<ul>
+<li><a href="#hero">Ana Sayfa</a></li>
+<li><a href="#latest-news">En Son Haberler</a></li>
+<li><a href="#latest-news">Kategoriler</a></li> <li><a href="#about">Hakkımızda</a></li> <li><a href="#contact">İletişim</a></li>
+</ul>
+</nav>
+<div class="header-actions">
+<div class="search-bar">
+<input placeholder="Ara..." type="text"/>
+<button><i class="fas fa-search"></i></button>
+</div>
+<div class="auth-buttons">
+<button onclick="openModal('login-modal')">Giriş Yap</button>
+<button onclick="openModal('signup-modal')">Kaydol</button>
+</div>
+<button class="dark-mode-toggle" id="darkModeToggle">
+<i class="fas fa-moon"></i>
+</button>
+</div>
+</div>
+</header>
+<section class="hero" id="hero"> <div class="container">
+<h1>Yapay Zekanın Geleceği Burada</h1>
+<p>En son AI haberleri, analizleri ve trendleri keşfedin.</p>
+<button onclick="window.location.href='#latest-news'">Haberleri Keşfet</button>
+</div>
+</section>
+<section class="latest-news-slider">
+<div class="container">
+<h2 class="section-title">Öne Çıkan Haberler</h2>
+<div class="slider">
+<div class="slides" id="slider-slides">
+<div class="slide">
+<img src="https://habereksprescomtr.teimg.com/crop/1280x720/haberekspres-com-tr/uploads/2024/09/yapay-zeka-ve-guvenlik-etik-tartismalarin-merkezi.png"/>
+<div class="slide-content">
+<h2>Yapay Zeka Etiği Tartışmaları Hız Kesmiyor</h2>
+<p>Yapay zeka sistemlerinin etik kullanımı üzerine küresel tartışmalar yoğunlaşıyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('featured1')">Devamını Oku</a>
+</div>
+</div>
+<div class="slide">
+<img src="https://www.unite.ai/wp-content/uploads/2021/11/robot-writers.jpg"/>
+<div class="slide-content">
+<h2>Yeni Nesil Üretken AI Modelleri Tanıtıldı</h2>
+<p>Daha akıllı ve verimli yapay zeka modelleri, sektörde yeni kapılar açıyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('featured2')">Devamını Oku</a>
+</div>
+</div>
+<div class="slide">
+<img src="https://www.webtures.com/wp-content/uploads/2024/03/yapay-zeka-ile-saglik-sektorunde-degisim.jpg"/>
+<div class="slide-content">
+<h2>Sağlıkta Yapay Zeka Devrimi: Tanı ve Tedavi</h2>
+<p>AI destekli sistemler, hastalıkların erken teşhisinde çığır açıyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('featured3')">Devamını Oku</a>
+</div>
+</div>
+</div>
+<div class="slider-nav">
+<button class="prev" id="slider-prev">❮</button>
+<button class="next" id="slider-next">❯</button>
+</div>
+<div class="dots" id="slider-dots"></div>
+</div>
+</div>
+</section>
+<section class="main-news" id="latest-news">
+<div class="container">
+<h2 class="section-title">En Son Haberler</h2>
+<div class="news-grid">
+<div class="news-card" data-news-id="news1">
+<img src="https://uzaktanegitim.com/images/blog/robotik-kodlama-nedir.png"/>
+<div class="news-card-content">
+<span class="category">Robotik</span>
+<h3>Yeni Nesil Robotlar Üretim Tesislerinde Yerini Alıyor</h3>
+<p>Endüstriyel robotlar, otomasyon süreçlerini hızlandırarak verimliliği artırıyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('news1')">Devamını Oku</a>
+</div>
+</div>
+<div class="news-card" data-news-id="news2">
+<img src="https://www.innova.com.tr/medias/yapay-zeka-ve-makine-ogrenimi-teknolojisi-gelismeleri.jpg"/>
+<div class="news-card-content">
+<span class="category">Makine Öğrenimi</span>
+<h3>Makine Öğrenimi ile Veri Analizinde Çığır Açan Gelişmeler</h3>
+<p>Büyük veri setlerinden anlamlı içgörüler elde etmek artık daha kolay.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('news2')">Devamını Oku</a>
+</div>
+</div>
+<div class="news-card" data-news-id="news3">
+<img src="https://www.karel.com.tr/sites/default/files/pictures/nlp-nedir.jpg"/>
+<div class="news-card-content">
+<span class="category">Doğal Dil İşleme</span>
+<h3>Doğal Dil İşleme Algoritmaları Sohbet Robotlarını Güçlendiriyor</h3>
+<p>Daha akıllı ve insan benzeri konuşma yeteneğine sahip chatbotlar yolda.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('news3')">Devamını Oku</a>
+</div>
+</div>
+<div class="news-card" data-news-id="news4">
+<img src="https://www.technopat.net/wp-content/uploads/2025/05/Computer-Vision-Bilgisayarli-Goru-Nedir-AI-Yapay-Zeka-1536x816.jpg"/>
+<div class="news-card-content">
+<span class="category">Bilgisayarlı Görü</span>
+<h3>Bilgisayarlı Görü ile Güvenlik Sistemlerinde Yenilikler</h3>
+<p>Yüz tanıma ve nesne takibi teknolojileri, güvenlik standartlarını yükseltiyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('news4')">Devamını Oku</a>
+</div>
+</div>
+<div class="news-card" data-news-id="news5">
+<img src="https://www.ekoturk.com/wp-content/uploads/2023/12/ai-yapay-zeka-ana-kart.webp"/>
+<div class="news-card-content">
+<span class="category">Regülasyon</span>
+<h3>Küresel Çapta Yapay Zeka Düzenlemeleri Artıyor</h3>
+<p>Hükümetler, yapay zekanın sorumlu kullanımı için yeni yasalar çıkarıyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('news5')">Devamını Oku</a>
+</div>
+</div>
+<div class="news-card" data-news-id="news6">
+<img src="https://habereksprescomtr.teimg.com/crop/1280x720/haberekspres-com-tr/uploads/2024/09/yapay-zeka-ve-guvenlik-etik-tartismalarin-merkezi.png"/>
+<div class="news-card-content">
+<span class="category">Etik</span>
+<h3>Yapay Zekada Şeffaflık ve Hesap Verebilirlik Önemi</h3>
+<p>AI sistemlerinin karar alma süreçlerinin anlaşılması kritik hale geliyor.</p>
+<a class="read-more" href="javascript:void(0);" onclick="openNewsDetail('news6')">Devamını Oku</a>
+</div>
+</div>
+</div>
+<button class="load-more-btn" onclick="loadMoreNews()">Daha Fazla Yükle</button>
+<div class="news-loader" id="news-loader">
+<div class="spinner"></div>
+</div>
+</div>
+</section>
+<section class="about-section" id="about">
+<div class="container">
+<h2 class="section-title">Hakkımızda</h2>
+<div class="about-content">
+<img alt="Hakkımızda Görseli" src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1"/>
+<p>AI News olarak, yapay zeka ve ilişkili teknolojiler dünyasındaki en son gelişmeleri, derinlemesine analizleri ve trendleri sizlere sunmak için buradayız. Alanında uzman ekibimizle, makine öğreniminden robotiklere, doğal dil işlemeden bilgisayarlı görüye kadar geniş bir yelpazede güvenilir ve güncel bilgiler sağlamayı hedefliyoruz. Misyonumuz, yapay zekanın heyecan verici ve hızla gelişen dünyasını herkes için anlaşılır kılmak ve bilgiye erişimi kolaylaştırmaktır. Yapay zekanın geleceğine ışık tutarken, etik ve sorumlu yapay zeka kullanımının önemini de vurguluyoruz.</p>
+<p>Bize katılın ve yapay zekanın geleceğini birlikte keşfedin!</p>
+</div>
+</div>
+</section>
+<section class="contact-section" id="contact">
+<div class="container">
+<h2 class="section-title">Bize Ulaşın</h2>
+<div class="contact-form">
+<form onsubmit="validateContactForm(event)">
+<label for="contact-name">Adınız Soyadınız:</label>
+<input id="contact-name" name="name" required="" type="text"/>
+<div class="contact-error" id="contact-name-error">Lütfen adınızı ve soyadınızı girin.</div>
+<label for="contact-email">E-posta Adresiniz:</label>
+<input id="contact-email" name="email" required="" type="email"/>
+<div class="contact-error" id="contact-email-error">Lütfen geçerli bir e-posta adresi girin.</div>
+<label for="contact-subject">Konu:</label>
+<input id="contact-subject" name="subject" required="" type="text"/>
+<div class="contact-error" id="contact-subject-error">Lütfen konuyu girin.</div>
+<label for="contact-message">Mesajınız:</label>
+<textarea id="contact-message" name="message" required=""></textarea>
+<div class="contact-error" id="contact-message-error">Lütfen mesajınızı girin.</div>
+<button type="submit">Mesajı Gönder</button>
+</form>
+<div class="contact-success" id="contact-success">Mesajınız başarıyla gönderildi!</div>
+<div class="contact-error" id="contact-general-error">Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.</div>
+</div>
+</div>
+</section>
+<footer>
+<div class="container footer-content">
+<div class="footer-section about">
+<h4>Hakkımızda</h4>
+<p>AI News, yapay zeka dünyasındaki en son gelişmeleri, haberleri ve analizleri sunan lider bir platformdur.</p>
+<div class="social-links">
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+</div>
+<div class="footer-section links">
+<h4>Hızlı Bağlantılar</h4>
+<ul>
+<li><a href="#">Gizlilik Politikası</a></li>
+<li><a href="#">Kullanım Koşulları</a></li>
+<li><a href="#">Kariyer</a></li>
+<li><a href="#">Site Haritası</a></li>
+</ul>
+</div>
+<div class="footer-section categories">
+<h4>Kategoriler</h4>
+<ul>
+<li><a href="#">Makine Öğrenimi</a></li>
+<li><a href="#">Derin Öğrenme</a></li>
+<li><a href="#">Robotik</a></li>
+<li><a href="#">NLP</a></li>
+<li><a href="#">Bilgisayarlı Görü</a></li>
+</ul>
+</div>
+<div class="footer-section newsletter">
+<h4>Bültenimize Kaydolun</h4>
+<p>En son AI haberlerini doğrudan gelen kutunuza alın.</p>
+<form onsubmit="return validateNewsletterForm()">
+<input placeholder="E-posta adresiniz" required="" type="email"/>
+<button type="submit">Abone Ol</button>
+</form>
+<div class="newsletter-error" id="newsletter-error"></div>
+</div>
+</div>
+<div class="footer-bottom">
+            © 2024 AI News. Tüm Hakları Saklıdır.
+        </div>
+</footer>
+<div class="modal" id="login-modal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('login-modal')">×</span>
+<h2>Giriş Yap</h2>
+<form onsubmit="validateLoginForm(event)">
+<label for="login-email">E-posta:</label>
+<input id="login-email" required="" type="email"/>
+<div class="modal-error" id="login-email-error">Lütfen geçerli bir e-posta adresi girin.</div>
+<label for="login-password">Şifre:</label>
+<input id="login-password" required="" type="password"/>
+<div class="modal-error" id="login-password-error">Lütfen şifrenizi girin (min. 6 karakter).</div>
+<button type="submit">Giriş Yap</button>
+</form>
+</div>
+</div>
+<div class="modal" id="signup-modal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('signup-modal')">×</span>
+<h2>Kaydol</h2>
+<form onsubmit="validateSignupForm(event)">
+<label for="signup-name">Adınız Soyadınız:</label>
+<input id="signup-name" required="" type="text"/>
+<div class="modal-error" id="signup-name-error">Lütfen adınızı ve soyadınızı girin.</div>
+<label for="signup-email">E-posta:</label>
+<input id="signup-email" required="" type="email"/>
+<div class="modal-error" id="signup-email-error">Lütfen geçerli bir e-posta adresi girin.</div>
+<label for="signup-password">Şifre:</label>
+<input id="signup-password" required="" type="password"/>
+<div class="modal-error" id="signup-password-error">Lütfen şifrenizi girin (min. 6 karakter).</div>
+<button type="submit">Kaydol</button>
+</form>
+</div>
+</div>
+<div class="modal news-detail-modal" id="news-detail-modal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('news-detail-modal')">×</span>
+<img alt="Haber Görseli" id="detail-news-image" src=""/>
+<span class="category" id="detail-news-category"></span>
+<h2 id="detail-news-title"></h2>
+<p id="detail-news-content"></p>
+</div>
+</div>
+<div class="chatbot-toggle-button" onclick="toggleChatbot()">
+<svg viewbox="0 0 24 24">
+<path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path>
+</svg>
+</div>
+<div class="chatbot-container" id="chatbotContainer">
+<div class="chatbot-header">
+<div class="chatbot-title">
+<span class="ai-status"></span>
+                AI Asistan
+            </div>
+<button class="close-btn" onclick="toggleChatbot()">×</button>
+</div>
+<div class="ai-service-selector">
+<div class="service-buttons">
+<button class="service-btn active" id="hf-btn" onclick="selectService('huggingface')">
+                    🤗 Hugging Face
+                </button>
+<button class="service-btn" id="cohere-btn" onclick="selectService('cohere')">
+                    🧠 Cohere
+                </button>
+<button class="service-btn" id="local-btn" onclick="selectService('local-ai')">
+                    🏠 Yerel AI
+                </button>
+</div>
+<div class="service-status" id="serviceStatus">
+                Hugging Face ücretsiz AI servisi aktif
+            </div>
+</div>
+<div class="chatbot-messages" id="chatbotMessages">
+<div class="message bot">
+<div class="message-content">
+                    Merhaba! Ben ücretsiz AI asistanınızım. Size yardımcı olmak için buradayım! 🤖
+                    <br/><br/>
+<strong>Özellikler:</strong><br/>
+                    • Hugging Face ücretsiz AI modeli<br/>
+                    • Cohere trial API'si<br/>
+                    • Yerel akıllı cevap sistemi<br/>
+<br/>
+                    Soru sorabilirsiniz!
+                </div>
+</div>
+</div>
+<div class="typing-indicator" id="typingIndicator">
+<div class="typing-dots">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+</div>
+<div class="chatbot-input">
+<div class="input-container">
+<input class="input-field" id="messageInput" onkeypress="handleKeyPress(event)" placeholder="Sorunuzu yazın..." type="text"/>
+<button class="send-btn" onclick="sendMessage()">
+<svg viewbox="0 0 24 24">
+<path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<script>
+        // Global variables
+        let currentService = 'huggingface';
+        let conversationHistory = [];
+
+        // News Data (expanded for detail modal)
+        const allNews = {
+            'featured1': {
+                image: 'https://habereksprescomtr.teimg.com/crop/1280x720/haberekspres-com-tr/uploads/2024/09/yapay-zeka-ve-guvenlik-etik-tartismalarin-merkezi.png',
+                category: 'Etik',
+                title: 'Yapay Zeka Etiği Tartışmaları Hız Kesmiyor',
+                content: 'Yapay zeka sistemlerinin etik kullanımı üzerine küresel tartışmalar yoğunlaşıyor. Geliştiriciler ve yasa koyucular, AI\'nın adil, şeffaf ve sorumlu bir şekilde kullanılmasını sağlamak için çabalıyorlar. Özellikle önyargı, veri gizliliği ve otonom sistemlerin denetimi gibi konular gündemde.'
+            },
+            'featured2': {
+                image: 'https://www.unite.ai/wp-content/uploads/2021/11/robot-writers.jpg',
+                category: 'Üretken AI',
+                title: 'Yeni Nesil Üretken AI Modelleri Tanıtıldı',
+                content: 'Üretken yapay zeka alanında çığır açan yeni modeller tanıtıldı. Bu modeller, metin, görsel ve hatta müzik üretiminde inanılmaz yetenekler sergiliyor. Sektör uzmanları, bu gelişmelerin yaratıcılık ve otomasyon süreçlerinde yeni kapılar açacağını belirtiyor.'
+            },
+            'featured3': {
+                image: 'https://www.webtures.com/wp-content/uploads/2024/03/yapay-zeka-ile-saglik-sektorunde-degisim.jpg',
+                category: 'Sağlık',
+                title: 'Sağlıkta Yapay Zeka Devrimi: Tanı ve Tedavi',
+                content: 'Yapay zeka destekli sistemler, sağlık sektöründe hastalıkların erken teşhisi ve kişiselleştirilmiş tedavi yöntemleri konusunda devrim yaratıyor. Görüntü analizi, genetik veri işleme ve ilaç keşfi gibi alanlarda AI\'nın etkinliği her geçen gün artıyor.'
+            },
+            'news1': {
+                image: 'https://uzaktanegitim.com/images/blog/robotik-kodlama-nedir.png',
+                category: 'Robotik',
+                title: 'Yeni Nesil Robotlar Üretim Tesislerinde Yerini Alıyor',
+                content: 'Endüstriyel robotlar, üretim süreçlerini hızlandırarak ve hata oranlarını düşürerek verimliliği artırıyor. Gelişmiş sensörler ve yapay zeka entegrasyonu sayesinde robotlar, daha karmaşık görevleri otonom bir şekilde yerine getirebiliyor.'
+            },
+            'news2': {
+                image: 'https://www.innova.com.tr/medias/yapay-zeka-ve-makine-ogrenimi-teknolojisi-gelismeleri.jpg',
+                category: 'Makine Öğrenimi',
+                title: 'Makine Öğrenimi ile Veri Analizinde Çığır Açan Gelişmeler',
+                content: 'Büyük veri setlerinden anlamlı içgörüler elde etmek ve gizli desenleri keşfetmek artık makine öğrenimi algoritmaları sayesinde daha kolay. Finans, perakende ve bilimsel araştırmalar gibi birçok alanda ML, karar alma süreçlerini optimize ediyor.'
+            },
+            'news3': {
+                image: 'https://www.karel.com.tr/sites/default/files/pictures/nlp-nedir.jpg',
+                category: 'Doğal Dil İşleme',
+                title: 'Doğal Dil İşleme Algoritmaları Sohbet Robotlarını Güçlendiriyor',
+                content: 'NLP (Doğal Dil İşleme) teknolojilerindeki ilerlemeler, sohbet robotlarını (chatbot) daha akıllı ve insan benzeri konuşma yeteneğine sahip hale getiriyor. Müşteri hizmetlerinden kişisel asistanlara kadar geniş bir kullanım alanı buluyorlar.'
+            },
+            'news4': {
+                image: 'https://www.technopat.net/wp-content/uploads/2025/05/Computer-Vision-Bilgisayarli-Goru-Nedir-AI-Yapay-Zeka-1536x816.jpg',
+                category: 'Bilgisayarlı Görü',
+                title: 'Bilgisayarlı Görü ile Güvenlik Sistemlerinde Yenilikler',
+                content: 'Bilgisayarlı görü teknolojileri, güvenlik ve gözetim sistemlerinde önemli yenilikler sunuyor. Yüz tanıma, nesne takibi ve anomali tespiti gibi özellikler, kamu güvenliğini ve özel mülklerin korunmasını daha etkin hale getiriyor.'
+            },
+            'news5': {
+                image: 'https://www.ekoturk.com/wp-content/uploads/2023/12/ai-yapay-zeka-ana-kart.webp',
+                category: 'Regülasyon',
+                title: 'Küresel Çapta Yapay Zeka Düzenlemeleri Artıyor',
+                content: 'Hükümetler ve uluslararası kuruluşlar, yapay zekanın sorumlu ve etik kullanımı için yeni yasal düzenlemeler çıkarmaya başladı. Bu düzenlemeler, AI geliştirme ve dağıtım süreçlerinde şeffaflık, hesap verebilirlik ve güvenlik sağlamayı hedefliyor.'
+            },
+            'news6': {
+                image: 'https://habereksprescomtr.teimg.com/crop/1280x720/haberekspres-com-tr/uploads/2024/09/yapay-zeka-ve-guvenlik-etik-tartismalarin-merkezi.png',
+                category: 'Etik',
+                title: 'Yapay Zekada Şeffaflık ve Hesap Verebilirlik Önemi',
+                content: 'Yapay zeka sistemlerinin karar alma süreçlerinin anlaşılabilir ve açıklanabilir olması, etik ve güvenilir AI gelişimi için kritik hale geliyor. Algoritmaların nasıl çalıştığını ve neden belirli kararları verdiğini anlamak, toplumsal güveni artırıyor.'
+            }
+        };
+
+
+        // Function to open any modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active'); // Use class to show
+            }
+        }
+
+        // Function to close any modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active'); // Use class to hide
+            }
+        }
+
+        // News Detail Modal logic
+        function openNewsDetail(newsId) {
+            const news = allNews[newsId];
+            if (news) {
+                document.getElementById('detail-news-image').src = news.image;
+                document.getElementById('detail-news-category').textContent = news.category;
+                document.getElementById('detail-news-title').textContent = news.title;
+                document.getElementById('detail-news-content').textContent = news.content;
+                openModal('news-detail-modal');
+            } else {
+                console.error('News item not found:', newsId);
+            }
+        }
+
+        // Chatbot açma/kapama
+        function toggleChatbot() {
+            const container = document.getElementById('chatbotContainer');
+            container.classList.toggle('active'); // Use class to toggle display
+        }
+
+        // AI servis seçimi
+        function selectService(service) {
+            currentService = service;
+            
+            // Button active states
+            document.querySelectorAll('.service-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`${service === 'huggingface' ? 'hf' : service === 'cohere' ? 'cohere' : 'local'}-btn`).classList.add('active');
+            
+            // Status update
+            const statusTexts = {
+                'huggingface': 'Hugging Face ücretsiz AI servisi aktif',
+                'cohere': 'Cohere trial API servisi aktif',
+                'local-ai': 'Yerel akıllı cevap sistemi aktif'
+            };
+            document.getElementById('serviceStatus').textContent = statusTexts[service];
+        }
+
+        // Enter tuşu ile mesaj gönderme
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Mesaj gönderme
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+
+            // Kullanıcı mesajını ekle
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Typing indicator göster
+            showTypingIndicator();
+
+            try {
+                let response;
+                switch(currentService) {
+                    case 'huggingface':
+                        response = await callHuggingFace(message);
+                        break;
+                    case 'cohere':
+                        response = await callCohere(message);
+                        break;
+                    case 'local-ai':
+                        response = await callLocalAI(message);
+                        break;
+                }
+                
+                hideTypingIndicator();
+                addMessage(response, 'bot');
+                
+            } catch (error) {
+                hideTypingIndicator();
+                addMessage(`Üzgünüm, bir hata oluştu. Yerel AI'ya geçiyorum...`, 'error');
+                
+                // Fallback to local AI
+                setTimeout(async () => {
+                    const fallbackResponse = await callLocalAI(message);
+                    addMessage(fallbackResponse, 'bot');
+                }, 1000);
+            }
+        }
+
+        // Hugging Face API çağrısı (ücretsiz)
+        async function callHuggingFace(message) {
+            try {
+                // Hugging Face Inference API - ücretsiz tier
+                const response = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-large', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        inputs: message,
+                        parameters: {
+                            max_length: 100,
+                            temperature: 0.7
+                        }
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data[0]?.generated_text?.replace(message, '').trim() || await callLocalAI(message);
+                } else {
+                    throw new Error('Hugging Face API hatası');
+                }
+            } catch (error) {
+                return await callLocalAI(message);
+            }
+        }
+
+        // Cohere API çağrısı (trial)
+        async function callCohere(message) {
+            try {
+                // Bu kısım demo amaçlı - gerçek Cohere trial key gerekir
+                // Şimdilik local AI'ya yönlendir
+                return await callLocalAI(message);
+            } catch (error) {
+                return await callLocalAI(message);
+            }
+        }
+
+        // Yerel AI - Gelişmiş cevap sistemi
+        async function callLocalAI(message) {
+            const userMessage = message.toLowerCase();
+            
+            // Gelişmiş AI cevap sistemi
+            const aiResponses = {
+                // Teknoloji soruları
+                'yapay zeka': [
+                    'Yapay zeka, makinelerin insan benzeri düşünme yetenekleri göstermesidir. Makine öğrenmesi, derin öğrenme ve sinir ağları gibi teknolojileri içerir.',
+                    'AI teknolojisi hızla gelişiyor! ChatGPT, DALL-E gibi modeller günlük hayatımızı değiştiriyor. Özellikle doğal dil işleme alanında büyük ilerlemeler var.',
+                    'Yapay zeka üç ana kategoride incelenir: Dar AI (belirli görevler), Genel AI (insan seviyesi) ve Süper AI (insan üstü). Şu anda Dar AI aşamasındayız.'
+                ],
+                
+                'makine öğrenmesi': [
+                    'Makine öğrenmesi, bilgisayarların verilerden öğrenerek tahminlerde bulunmasını sağlar. Gözetimli, gözetimsiz ve pekiştirmeli öğrenme türleri vardır.',
+                    'ML algoritmaları arasında lineer regresyon, karar ağaçları, rastgele orman ve sinir ağları popülerdir. Her biri farklı problemler için uygundur.'
+                ],
+                
+                'python': [
+                    'Python, AI ve veri bilimi için en popüler programlama dilidir. Pandas, NumPy, Scikit-learn, TensorFlow gibi güçlü kütüphaneleri vardır.',
+                    'Python öğrenmek için önce temel syntax\'ını öğrenin, sonra veri yapıları ve algoritmalarla devam edin. Jupyter Notebook kullanmayı da öneriyorum.'
+                ],
+
+                'javascript': [
+                    'JavaScript modern web geliştirmenin temel taşıdır. React, Vue, Angular gibi framework\'lerle güçlü uygulamalar geliştirebilirsiniz.',
+                    'JS ile sadece frontend değil, Node.js ile backend de geliştirebilirsiniz. TensorFlow.js ile tarayıcıda AI uygulamaları da yapabilirsiniz!'
+                ],
+
+                'react': [
+                    'React, Facebook tarafından geliştirilen popüler bir JavaScript kütüphanesidir. Component tabanlı yapısı ve virtual DOM ile hızlı uygulamalar geliştirebilirsiniz.',
+                    'React öğrenmek için önce JavaScript\'i iyi bilmelisiniz. Hooks, state management ve component lifecycle\'ını anlamak önemlidir.'
+                ],
+
+                'robotik': [
+                    'Robotik, mühendislik ve bilgisayar biliminin birleşimidir. Endüstriyel robotlardan insansı robotlara kadar geniş bir yelpazesi vardır.',
+                    'ROS (Robot Operating System), robotik geliştirme için standart platform haline gelmiştir. C++ ve Python ile robot programlama yapabilirsiniz.'
+                ],
+
+                'blockchain': [
+                    'Blockchain, merkezi olmayan dağıtık veri tabanı teknolojisidir. Bitcoin, Ethereum gibi kripto paralar bu teknoloji üzerine kuruludur.',
+                    'Smart contract\'lar, Solidity dili ile yazılır. DeFi, NFT ve Web3 teknolojilerinin temelini oluşturur.'
+                ],
+
+                'web geliştirme': [
+                    'Modern web geliştirme HTML, CSS, JavaScript temelinde yapılır. Frontend için React/Vue/Angular, backend için Node.js/Python/Java kullanılabilir.',
+                    'Full-stack geliştirici olmak için hem frontend hem backend teknolojilerini öğrenmelisiniz. Ayrıca veritabanı bilgisi de önemlidir.'
+                ],
+
+                'veri bilimi': [
+                    'Veri bilimi, büyük verilerden anlamlı bilgiler çıkarma sanatıdır. Python, R, SQL ve istatistik bilgisi gereklidir.',
+                    'Veri bilimci olmak için matematik, programlama ve domain bilgisi üçgenini tamamlamalısınız. Kaggle\'da practice yapmanızı öneririm.'
+                ],
+
+                'siber güvenlik': [
+                    'Siber güvenlik, dijital sistemleri koruma bilimidir. Penetration testing, network security, cryptography gibi alanları kapsar.',
+                    'Ethical hacking öğrenmek için Linux, networking ve programming bilgisi şarttır. CEH, CISSP gibi sertifikalar kariyer açısından önemlidir.'
+                ],
+
+                // Genel sorular
+                'merhaba': [
+                    'Merhaba! 👋 Size nasıl yardımcı olabilirim? Teknoloji, programlama, AI konularında sorularınızı alabilirim.',
+                    'Selam! Ben AI asistanınızım. Hangi konuda bilgi almak istiyorsunuz?',
+                    'Merhaba! Teknoloji dünyasından ne öğrenmek istiyorsunuz bugün?'
+                ],
+
+                'nasılsın': [
+                    'Harika hissediyorum! 🤖 Yeni sorular öğrenmek için sabırsızlanıyorum. Siz nasılsınız?',
+                    'Çok iyiyim, teşekkürler! Size yardımcı olmaya hazırım. Hangi konuda konuşmak istersiniz?'
+                ],
+
+                'teşekkür': [
+                    'Rica ederim! 😊 Başka sorularınız olursa çekinmeden sorun.',
+                    'Ne demek! Yardımcı olabildiysem ne mutlu bana. Başka bir şey merak ediyorsanız sorun.'
+                ],
+
+                'yardım': [
+                    'Tabii ki yardım edebilirim! Size şu konularda destek olabilirim:\n\n• Programlama (Python, JavaScript, React)\n• Yapay Zeka ve Makine Öğrenmesi\n• Web Geliştirme\n• Veri Bilimi\n• Siber Güvenlik\n• Teknoloji Trendleri\n\nHangi konuda bilgi almak istiyorsunuz?'
+                ]
+            };
+
+            // Anahtar kelime eşleştirme (gelişmiş)
+            for (let key in aiResponses) {
+                if (userMessage.includes(key) || 
+                    userMessage.includes(key.replace('ı', 'i')) || 
+                    userMessage.includes(key.replace('ş', 's'))) {
+                    const responses = aiResponses[key];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            }
+
+            // Soru tipi analizi
+            if (userMessage.includes('nasıl') || userMessage.includes('nası')) {
+                return 'Bu konuda size adım adım rehberlik edebilirim. Hangi özel alanla ilgili bilgi istiyorsunuz? Örneğin programlama, AI, web geliştirme gibi...';
+            }
+
+            if (userMessage.includes('ne') && userMessage.includes('?')) {
+                return 'İlginç bir soru! Bu konu hakkında daha spesifik ne öğrenmek istiyorsunuz? Teknik detaylar mı yoksa genel bilgi mi?';
+            }
+
+            if (userMessage.includes('öğren') || userMessage.includes('öner')) {
+                return 'Öğrenme yolculuğunuzda size yardımcı olmaktan mutluluk duyarım! Hangi teknoloji alanında uzmanlaşmak istiyorsunuz? Python, JavaScript, AI, web geliştirme gibi seçenekler var.';
+            }
+
+            // Gelişmiş varsayılan cevaplar
+            const advancedDefaults = [
+                'Bu konuda size daha iyi yardımcı olabilmem için biraz daha detay verebilir misiniz? Hangi özel alanla ilgili bilgi arıyorsunuz?',
+                'İlginç bir konu! Teknoloji dünyası çok geniş. Bu sorunuzu daha spesifik hale getirirseniz size daha değerli bilgiler verebilirim.',
+                'Bu konuda derinlemesine bilgi verebilirim! Özellikle hangi yönüyle ilgileniyorsunuz? Teknik mi, pratik mi, yoksa teorik bilgi mi?',
+                'Harika bir soru! Size en güncel ve doğru bilgiyi verebilmek için konuyu biraz daha daraltabilir miyiz?',
+                'Bu alanda size yardımcı olmak istiyorum. Daha spesifik bir soru sorarsanız, size daha kapsamlı bir cevap verebilirim.'
+            ];
+
+            return advancedDefaults[Math.floor(Math.random() * advancedDefaults.length)];
+        }
+
+        // UI Helper Functions
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            // Basit formatting
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            text = text.replace(/\n/g, '<br>');
+            text = text.replace(/•/g, '&bull;'); // Use HTML entity for bullet points
+            
+            contentDiv.innerHTML = text;
+            messageDiv.appendChild(contentDiv);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            const messagesContainer = document.getElementById('chatbotMessages');
+            indicator.style.display = 'block';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'none';
+        }
+
+        // Sayfa yüklendiğinde başlat
+        window.addEventListener('load', function() {
+            document.querySelector('.chatbot-toggle-button').style.display = 'flex';
+        });
+
+        // Placeholder functions for form validations and news loading (if not provided elsewhere)
+        function validateContactForm(event) {
+            event.preventDefault(); // Prevent actual form submission
+            // Add your validation logic here. For demonstration, just show success.
+            document.getElementById('contact-success').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('contact-success').style.display = 'none';
+            }, 3000);
+        }
+
+        function validateLoginForm(event) {
+            event.preventDefault();
+            // Implement login validation
+            alert('Login functionality not implemented in this demo.');
+            closeModal('login-modal');
+        }
+
+        function validateSignupForm(event) {
+            event.preventDefault();
+            // Implement signup validation
+            alert('Signup functionality not implemented in this demo.');
+            closeModal('signup-modal');
+        }
+
+        function validateNewsletterForm() {
+            // Implement newsletter validation
+            alert('Newsletter subscription functionality not implemented in this demo.');
+            return false; // Prevent form submission
+        }
+
+        function loadMoreNews() {
+            const loader = document.getElementById('news-loader');
+            loader.style.display = 'block';
+            setTimeout(() => {
+                // In a real scenario, you would fetch more news here
+                alert('Daha fazla haber yüklendi! (Bu sadece bir demo)');
+                loader.style.display = 'none';
+            }, 1500);
+        }
+
+        // Slider functionality (from your original code)
+        let slideIndex = 0;
+        const slides = document.getElementById('slider-slides');
+        const dotsContainer = document.getElementById('slider-dots');
+        const totalSlides = slides.children.length;
+
+        function showSlides() {
+            slides.style.transform = `translateX(${-slideIndex * 100}%)`;
+            updateDots();
+        }
+
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % totalSlides;
+            showSlides();
+        }
+
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+            showSlides();
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlides();
+        }
+
+        function createDots() {
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.onclick = () => currentSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+            updateDots();
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === slideIndex);
+            });
+        }
+
+        // Initialize slider
+        document.addEventListener('DOMContentLoaded', () => {
+            createDots();
+            document.getElementById('slider-next').addEventListener('click', nextSlide);
+            document.getElementById('slider-prev').addEventListener('click', prevSlide);
+            // Auto slide
+            setInterval(nextSlide, 5000); 
+        });
+
+        // Dark mode toggle (from your original code)
+        document.getElementById('darkModeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('darkModeToggle').querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+    </script>
+</body>
+</html>
